@@ -1,0 +1,235 @@
+import { GraphQLResolveInfo } from 'graphql';
+export type Maybe<T> = T | null;
+export type InputMaybe<T> = Maybe<T>;
+export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
+/** All built-in and custom scalars, mapped to their actual values */
+export type Scalars = {
+  ID: { input: string; output: string; }
+  String: { input: string; output: string; }
+  Boolean: { input: boolean; output: boolean; }
+  Int: { input: number; output: number; }
+  Float: { input: number; output: number; }
+};
+
+export type Address = {
+  __typename?: 'Address';
+  city?: Maybe<Scalars['String']['output']>;
+  state?: Maybe<UsState>;
+  street?: Maybe<Scalars['String']['output']>;
+  zipcode?: Maybe<Scalars['String']['output']>;
+};
+
+export type AddressInput = {
+  city?: InputMaybe<Scalars['String']['input']>;
+  state?: InputMaybe<UsState>;
+  street?: InputMaybe<Scalars['String']['input']>;
+  zipcode?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type BasicQuery = {
+  __typename?: 'BasicQuery';
+  username?: Maybe<Scalars['String']['output']>;
+};
+
+export type CreateAddressInput = {
+  address: AddressInput;
+  username: Scalars['String']['input'];
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  createAddress?: Maybe<Address>;
+};
+
+
+export type MutationCreateAddressArgs = {
+  address: AddressInput;
+  username: Scalars['String']['input'];
+};
+
+export type Query = {
+  __typename?: 'Query';
+  address?: Maybe<Address>;
+};
+
+
+export type QueryAddressArgs = {
+  username: Scalars['String']['input'];
+};
+
+export enum UsState {
+  Ak = 'AK',
+  Al = 'AL',
+  Ar = 'AR',
+  Az = 'AZ',
+  Ca = 'CA',
+  Co = 'CO',
+  Ct = 'CT',
+  De = 'DE',
+  Fl = 'FL',
+  Ga = 'GA',
+  Hi = 'HI',
+  Ia = 'IA',
+  Id = 'ID',
+  Il = 'IL',
+  In = 'IN',
+  Ks = 'KS',
+  Ky = 'KY',
+  La = 'LA',
+  Ma = 'MA',
+  Md = 'MD',
+  Me = 'ME',
+  Mi = 'MI',
+  Mn = 'MN',
+  Mo = 'MO',
+  Ms = 'MS',
+  Mt = 'MT',
+  Nc = 'NC',
+  Nd = 'ND',
+  Ne = 'NE',
+  Nh = 'NH',
+  Nj = 'NJ',
+  Nm = 'NM',
+  Nv = 'NV',
+  Ny = 'NY',
+  Oh = 'OH',
+  Ok = 'OK',
+  Or = 'OR',
+  Pa = 'PA',
+  Ri = 'RI',
+  Sc = 'SC',
+  Sd = 'SD',
+  Tn = 'TN',
+  Tx = 'TX',
+  Ut = 'UT',
+  Va = 'VA',
+  Vt = 'VT',
+  Wa = 'WA',
+  Wi = 'WI',
+  Wv = 'WV',
+  Wy = 'WY'
+}
+
+export type WithIndex<TObject> = TObject & Record<string, any>;
+export type ResolversObject<TObject> = WithIndex<TObject>;
+
+export type ResolverTypeWrapper<T> = Promise<T> | T;
+
+
+export type ResolverWithResolve<TResult, TParent, TContext, TArgs> = {
+  resolve: ResolverFn<TResult, TParent, TContext, TArgs>;
+};
+export type Resolver<TResult, TParent = Record<PropertyKey, never>, TContext = Record<PropertyKey, never>, TArgs = Record<PropertyKey, never>> = ResolverFn<TResult, TParent, TContext, TArgs> | ResolverWithResolve<TResult, TParent, TContext, TArgs>;
+
+export type ResolverFn<TResult, TParent, TContext, TArgs> = (
+  parent: TParent,
+  args: TArgs,
+  context: TContext,
+  info: GraphQLResolveInfo
+) => Promise<TResult> | TResult;
+
+export type SubscriptionSubscribeFn<TResult, TParent, TContext, TArgs> = (
+  parent: TParent,
+  args: TArgs,
+  context: TContext,
+  info: GraphQLResolveInfo
+) => AsyncIterable<TResult> | Promise<AsyncIterable<TResult>>;
+
+export type SubscriptionResolveFn<TResult, TParent, TContext, TArgs> = (
+  parent: TParent,
+  args: TArgs,
+  context: TContext,
+  info: GraphQLResolveInfo
+) => TResult | Promise<TResult>;
+
+export interface SubscriptionSubscriberObject<TResult, TKey extends string, TParent, TContext, TArgs> {
+  subscribe: SubscriptionSubscribeFn<{ [key in TKey]: TResult }, TParent, TContext, TArgs>;
+  resolve?: SubscriptionResolveFn<TResult, { [key in TKey]: TResult }, TContext, TArgs>;
+}
+
+export interface SubscriptionResolverObject<TResult, TParent, TContext, TArgs> {
+  subscribe: SubscriptionSubscribeFn<any, TParent, TContext, TArgs>;
+  resolve: SubscriptionResolveFn<TResult, any, TContext, TArgs>;
+}
+
+export type SubscriptionObject<TResult, TKey extends string, TParent, TContext, TArgs> =
+  | SubscriptionSubscriberObject<TResult, TKey, TParent, TContext, TArgs>
+  | SubscriptionResolverObject<TResult, TParent, TContext, TArgs>;
+
+export type SubscriptionResolver<TResult, TKey extends string, TParent = Record<PropertyKey, never>, TContext = Record<PropertyKey, never>, TArgs = Record<PropertyKey, never>> =
+  | ((...args: any[]) => SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>)
+  | SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>;
+
+export type TypeResolveFn<TTypes, TParent = Record<PropertyKey, never>, TContext = Record<PropertyKey, never>> = (
+  parent: TParent,
+  context: TContext,
+  info: GraphQLResolveInfo
+) => Maybe<TTypes> | Promise<Maybe<TTypes>>;
+
+export type IsTypeOfResolverFn<T = Record<PropertyKey, never>, TContext = Record<PropertyKey, never>> = (obj: T, context: TContext, info: GraphQLResolveInfo) => boolean | Promise<boolean>;
+
+export type NextResolverFn<T> = () => Promise<T>;
+
+export type DirectiveResolverFn<TResult = Record<PropertyKey, never>, TParent = Record<PropertyKey, never>, TContext = Record<PropertyKey, never>, TArgs = Record<PropertyKey, never>> = (
+  next: NextResolverFn<TResult>,
+  parent: TParent,
+  args: TArgs,
+  context: TContext,
+  info: GraphQLResolveInfo
+) => TResult | Promise<TResult>;
+
+
+
+
+
+/** Mapping between all available schema types and the resolvers types */
+export type ResolversTypes = ResolversObject<{
+  Address: ResolverTypeWrapper<Address>;
+  AddressInput: AddressInput;
+  BasicQuery: ResolverTypeWrapper<BasicQuery>;
+  Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
+  CreateAddressInput: CreateAddressInput;
+  Mutation: ResolverTypeWrapper<Record<PropertyKey, never>>;
+  Query: ResolverTypeWrapper<Record<PropertyKey, never>>;
+  String: ResolverTypeWrapper<Scalars['String']['output']>;
+  USState: UsState;
+}>;
+
+/** Mapping between all available schema types and the resolvers parents */
+export type ResolversParentTypes = ResolversObject<{
+  Address: Address;
+  AddressInput: AddressInput;
+  BasicQuery: BasicQuery;
+  Boolean: Scalars['Boolean']['output'];
+  CreateAddressInput: CreateAddressInput;
+  Mutation: Record<PropertyKey, never>;
+  Query: Record<PropertyKey, never>;
+  String: Scalars['String']['output'];
+}>;
+
+export type AddressResolvers<ContextType = any, ParentType extends ResolversParentTypes['Address'] = ResolversParentTypes['Address']> = ResolversObject<{
+  city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  state?: Resolver<Maybe<ResolversTypes['USState']>, ParentType, ContextType>;
+  street?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  zipcode?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+}>;
+
+export type BasicQueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['BasicQuery'] = ResolversParentTypes['BasicQuery']> = ResolversObject<{
+  username?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+}>;
+
+export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
+  createAddress?: Resolver<Maybe<ResolversTypes['Address']>, ParentType, ContextType, RequireFields<MutationCreateAddressArgs, 'address' | 'username'>>;
+}>;
+
+export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
+  address?: Resolver<Maybe<ResolversTypes['Address']>, ParentType, ContextType, RequireFields<QueryAddressArgs, 'username'>>;
+}>;
+
+export type Resolvers<ContextType = any> = ResolversObject<{
+  Address?: AddressResolvers<ContextType>;
+  BasicQuery?: BasicQueryResolvers<ContextType>;
+  Mutation?: MutationResolvers<ContextType>;
+  Query?: QueryResolvers<ContextType>;
+}>;
+

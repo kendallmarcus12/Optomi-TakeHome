@@ -8,5 +8,11 @@
     "street": "234 Other St",
     "city": "Townville",
     "zipcode": "32145"
+  },
+  "witch":{
+    "street": "456 Sweets St.",
+    "city": "Candyville",
+    "zipcode": "11111",
+    "state": "OH"
   }
 }
