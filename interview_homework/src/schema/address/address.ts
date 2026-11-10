@@ -1,5 +1,6 @@
 import * as addressTable from '../../../data/addresses.json';
-import { Addresses, Address, Args } from './types';
+import { Addresses, Args } from './types';
+import { Address } from '../__generated__/resolvers-types';
 import { GraphQLError } from 'graphql';
 const addresses = addressTable as Addresses;
 

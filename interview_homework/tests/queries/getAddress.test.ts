@@ -2,7 +2,7 @@ import { parse } from 'graphql';
 import { executor } from '../exectuor';
 
 describe('getAddress', () => {
-  test('Success', async () => {
+  test('Standard Fetch', async () => {
     const query = `
             query GetAddress($username: String!) {
                 address(username: $username) {
@@ -31,6 +31,37 @@ describe('getAddress', () => {
     });
   });
 
+  test('State Fetch Success', async () => {
+    const query = `
+            query GetAddress($username: String!) {
+                address(username: $username) {
+                    street
+                    city
+                    zipcode
+                    state
+                }
+            }
+        `;
+
+    const variables = { username: 'witch' };
+
+    const result = await executor({
+      document: parse(query),
+      variables,
+    });
+
+    expect(result).toEqual({
+      "data": {
+        "address": {
+          street: '456 Sweets St.',
+          city: 'Candyville',
+          zipcode: '11111',
+          state: 'OH'
+        }
+      }
+    });
+  });
+
   test('Error', async () => {
     const query = `
             query GetAddress($username: String!) {
@@ -38,6 +69,7 @@ describe('getAddress', () => {
                     street
                     city
                     zipcode
+                    state
                 }
             }
         `;

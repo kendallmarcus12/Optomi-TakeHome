@@ -1,5 +1,6 @@
+import { Address } from "./__generated__/resolvers-types";
 import { getAddress } from "./address/address";
-import { Address, Args } from "./address/types";
+import { Args } from "./address/types";
 
 export const resolvers = {
   Query: {

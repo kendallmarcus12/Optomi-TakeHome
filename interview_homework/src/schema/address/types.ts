@@ -1,8 +1,4 @@
-export type Address = {
-  street: string;
-  city: string;
-  zipcode: string;
-};
+import { Address } from '../__generated__/resolvers-types';
 
 export type Addresses = {
   [key: string]: Address;
