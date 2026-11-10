@@ -61,3 +61,15 @@ type Address {
   zipcode: String
   state: USState
 }
+
+input AddressInput {
+  street: String
+  city: String
+  zipcode: String
+  state: USState
+}
+
+input CreateAddressInput {
+  username: String!
+  address: AddressInput!
+}
