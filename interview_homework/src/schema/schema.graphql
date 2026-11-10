@@ -3,5 +3,5 @@ type Query {
 }
 
 type Mutation{
-  createAddress(address: CreateAddressInput!): Address
+  createAddress(addressInput: CreateAddressInput!): Address
 }

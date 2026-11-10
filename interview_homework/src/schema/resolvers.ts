@@ -1,4 +1,4 @@
-import { Address, AddressInput, CreateAddressInput } from "./__generated__/resolvers-types";
+import { Address, MutationCreateAddressArgs } from "./__generated__/resolvers-types";
 import { getAddress, createAddress } from "./address/address";
 import { Args } from "./address/types";
 
@@ -9,7 +9,7 @@ export const resolvers = {
     },
   },
   Mutation: {
-    createAddress: (parent: any, args: CreateAddressInput, context: any, info: any): Address => {
+    createAddress: (parent: any, args: MutationCreateAddressArgs, context: any, info: any): Address => {
       return createAddress(parent, args, context);
     },
   },
