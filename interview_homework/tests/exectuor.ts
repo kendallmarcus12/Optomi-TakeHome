@@ -4,7 +4,6 @@ import { genSchema } from '../src/schema';
 import plugins from '../src/envelop/index';
 import { AddressDataStore } from '../src/datasource/addressDataSource';
 import {UsState} from '../src/schema/__generated__/resolvers-types';
-import { createContext } from 'vm';
 
 console.profile = jest.fn();
 const schema = genSchema();
@@ -31,6 +30,7 @@ const store = new AddressDataStore({
 
 const yoga = createYoga({ schema, plugins, context: { store }});
 
-export const executor = buildHTTPExecutor({
+export const executor = buildHTTPExecutor({ 
+  headers: { 'client': 'testuser' },
   fetch: yoga.fetch,
 });
