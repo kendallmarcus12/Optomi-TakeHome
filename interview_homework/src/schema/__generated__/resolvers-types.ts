@@ -43,8 +43,7 @@ export type Mutation = {
 
 
 export type MutationCreateAddressArgs = {
-  address: AddressInput;
-  username: Scalars['String']['input'];
+  addressInput: CreateAddressInput;
 };
 
 export type Query = {
@@ -219,7 +218,7 @@ export type BasicQueryResolvers<ContextType = any, ParentType extends ResolversP
 }>;
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
-  createAddress?: Resolver<Maybe<ResolversTypes['Address']>, ParentType, ContextType, RequireFields<MutationCreateAddressArgs, 'address' | 'username'>>;
+  createAddress?: Resolver<Maybe<ResolversTypes['Address']>, ParentType, ContextType, RequireFields<MutationCreateAddressArgs, 'addressInput'>>;
 }>;
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
