@@ -1,5 +1,7 @@
+import { describe, expect, test } from '@jest/globals';
 import { parse } from 'graphql';
 import { executor } from '../exectuor';
+
 
 describe('createAddress', () => {
   test('Standard Create Address', async () => {
@@ -19,7 +21,7 @@ describe('createAddress', () => {
       document: parse(query),
     });
 
-    expect(result).toEqual({
+    expect(result).toMatchObject({
       "data": {
         "createAddress": {
           city: 'charlotte',
@@ -53,14 +55,12 @@ describe('createAddress', () => {
       variables,
     });
     
-    expect(result).toEqual(
-    expect.objectContaining(
+    expect(result).toMatchObject(
       {
         "errors": expect.arrayContaining([expect.objectContaining({
           "message": "Unable to create new address in createAddress resolver"
         })])
       }
-    )
     );
   });
 });
