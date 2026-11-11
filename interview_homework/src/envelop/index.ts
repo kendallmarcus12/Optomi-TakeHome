@@ -2,6 +2,7 @@ import { Plugin, useEngine } from '@envelop/core';
 import { parse, validate, specifiedRules, execute, subscribe } from 'graphql';
 import { useParserCache } from '@envelop/parser-cache';
 import { useValidationCache } from '@envelop/validation-cache';
+import { useValidateClient } from './useValidateClient';
 import { buildHeaders } from './buildHeaders';
 import { useLogger } from './useLogger';
 import { ContextType } from '../types';
@@ -10,6 +11,7 @@ const plugins: Plugin<ContextType>[] = [
   useEngine({ parse, validate, specifiedRules, execute, subscribe }) as Plugin<ContextType>,
   buildHeaders(),
   useLogger(),
+  useValidateClient() as Plugin<ContextType>,
   useParserCache() as Plugin<ContextType>,
   useValidationCache() as Plugin<ContextType>,
 ];
