@@ -27,7 +27,7 @@ export const useValidateClient = (): Plugin => ({
       ?.trim()
       .toLowerCase();
 
-    //We should be able to guarentee te client wont be empty since we validated it above.
+    //We should be able to guarentee te client wont be empty since we validated in useValidateClient.
     if (!READ_ONLY_LIST.includes(client!)) return;
 
     const operation = getOperationAST(args.document, args.operationName);

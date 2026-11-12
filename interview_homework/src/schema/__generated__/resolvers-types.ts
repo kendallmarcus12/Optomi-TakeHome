@@ -46,14 +46,39 @@ export type MutationCreateAddressArgs = {
   addressInput: CreateAddressInput;
 };
 
+export type NearEarthObject = {
+  __typename?: 'NearEarthObject';
+  closeApproachDate?: Maybe<Scalars['String']['output']>;
+  estimatedDiameterMaxKm?: Maybe<Scalars['Float']['output']>;
+  estimatedDiameterMinKm?: Maybe<Scalars['Float']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  isPotentiallyHazardousAsteroid?: Maybe<Scalars['Boolean']['output']>;
+  missDistanceKm?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  relativeVelocityKph?: Maybe<Scalars['String']['output']>;
+};
+
+export type NearEarthObjectFeed = {
+  __typename?: 'NearEarthObjectFeed';
+  elementCount?: Maybe<Scalars['Int']['output']>;
+  objects?: Maybe<Array<Maybe<NearEarthObject>>>;
+};
+
 export type Query = {
   __typename?: 'Query';
   address?: Maybe<Address>;
+  nearEarthObjects?: Maybe<NearEarthObjectFeed>;
 };
 
 
 export type QueryAddressArgs = {
   username: Scalars['String']['input'];
+};
+
+
+export type QueryNearEarthObjectsArgs = {
+  endDate: Scalars['String']['input'];
+  startDate: Scalars['String']['input'];
 };
 
 export enum UsState {
@@ -188,7 +213,11 @@ export type ResolversTypes = ResolversObject<{
   BasicQuery: ResolverTypeWrapper<BasicQuery>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
   CreateAddressInput: CreateAddressInput;
+  Float: ResolverTypeWrapper<Scalars['Float']['output']>;
+  Int: ResolverTypeWrapper<Scalars['Int']['output']>;
   Mutation: ResolverTypeWrapper<Record<PropertyKey, never>>;
+  NearEarthObject: ResolverTypeWrapper<NearEarthObject>;
+  NearEarthObjectFeed: ResolverTypeWrapper<NearEarthObjectFeed>;
   Query: ResolverTypeWrapper<Record<PropertyKey, never>>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
   USState: UsState;
@@ -201,7 +230,11 @@ export type ResolversParentTypes = ResolversObject<{
   BasicQuery: BasicQuery;
   Boolean: Scalars['Boolean']['output'];
   CreateAddressInput: CreateAddressInput;
+  Float: Scalars['Float']['output'];
+  Int: Scalars['Int']['output'];
   Mutation: Record<PropertyKey, never>;
+  NearEarthObject: NearEarthObject;
+  NearEarthObjectFeed: NearEarthObjectFeed;
   Query: Record<PropertyKey, never>;
   String: Scalars['String']['output'];
 }>;
@@ -221,14 +254,33 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   createAddress?: Resolver<Maybe<ResolversTypes['Address']>, ParentType, ContextType, RequireFields<MutationCreateAddressArgs, 'addressInput'>>;
 }>;
 
+export type NearEarthObjectResolvers<ContextType = any, ParentType extends ResolversParentTypes['NearEarthObject'] = ResolversParentTypes['NearEarthObject']> = ResolversObject<{
+  closeApproachDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  estimatedDiameterMaxKm?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  estimatedDiameterMinKm?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  isPotentiallyHazardousAsteroid?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  missDistanceKm?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  relativeVelocityKph?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+}>;
+
+export type NearEarthObjectFeedResolvers<ContextType = any, ParentType extends ResolversParentTypes['NearEarthObjectFeed'] = ResolversParentTypes['NearEarthObjectFeed']> = ResolversObject<{
+  elementCount?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  objects?: Resolver<Maybe<Array<Maybe<ResolversTypes['NearEarthObject']>>>, ParentType, ContextType>;
+}>;
+
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
   address?: Resolver<Maybe<ResolversTypes['Address']>, ParentType, ContextType, RequireFields<QueryAddressArgs, 'username'>>;
+  nearEarthObjects?: Resolver<Maybe<ResolversTypes['NearEarthObjectFeed']>, ParentType, ContextType, RequireFields<QueryNearEarthObjectsArgs, 'endDate' | 'startDate'>>;
 }>;
 
 export type Resolvers<ContextType = any> = ResolversObject<{
   Address?: AddressResolvers<ContextType>;
   BasicQuery?: BasicQueryResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
+  NearEarthObject?: NearEarthObjectResolvers<ContextType>;
+  NearEarthObjectFeed?: NearEarthObjectFeedResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
 }>;
 

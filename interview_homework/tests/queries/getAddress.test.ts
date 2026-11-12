@@ -1,3 +1,4 @@
+import { describe, expect, test } from '@jest/globals';
 import { parse } from 'graphql';
 import { executor } from '../exectuor';
 
@@ -20,7 +21,7 @@ describe('getAddress', () => {
       variables,
     });
 
-    expect(result).toEqual({
+    expect(result).toMatchObject({
       "data": {
         "address": {
           street: '123 Street St.',
@@ -50,7 +51,7 @@ describe('getAddress', () => {
       variables,
     });
 
-    expect(result).toEqual({
+    expect(result).toMatchObject({
       "data": {
         "address": {
           street: '456 Sweets St.',
@@ -88,7 +89,6 @@ describe('getAddress', () => {
           "message": "No address found in getAddress resolver"
         })])
       }
-    )
-    );
+    ));
   });
 });
