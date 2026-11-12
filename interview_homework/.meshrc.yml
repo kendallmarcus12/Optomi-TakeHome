@@ -26,7 +26,7 @@ sources:
                 type: string
                 nullable: false
         queryParams:
-          api_key: JLgg6FRWKkCRk8pmDmzJwCRKLw9KjdwmWCgkrKpm
+          api_key: DEMO_KEY
 
     transforms:
       - cache:
