@@ -3,6 +3,7 @@ import { genSchema } from './schema';
 import { createYoga } from 'graphql-yoga';
 import {AddressDataStore} from './datasource/addressDataSource';
 import plugins from './envelop';
+import { getMeshSDK } from '../.mesh';
 
 const yogaPort = 4000;
 
@@ -11,7 +12,8 @@ const yogaPort = 4000;
   const store = AddressDataStore.fromFile('./data/addresses.json');
 
   const schema = await genSchema();
-  const yoga = createYoga({ schema, plugins: plugins, context: { store } });
+  const meshSDK = await getMeshSDK();
+  const yoga = createYoga({ schema: schema, plugins: plugins, context: { store, meshSDK } });
   const server = createServer(yoga);
 
   server.listen(yogaPort, () => {

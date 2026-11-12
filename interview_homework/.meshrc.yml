@@ -1,0 +1,51 @@
+documents:
+  - ./src/schema/meshes/**/*Document.graphql
+
+# In-memory LRU store used by the cache transform below.
+cache:
+  inmemoryLru:
+    max: 100
+
+sources:
+  - name: NASA
+    handler:
+      jsonSchema:
+        endpoint: https://api.nasa.gov/neo/rest/v1
+        operations:
+          - type: Query
+            field: neoFeed
+            method: GET
+            path: /feed?start_date={args.start_date}&end_date={args.end_date}
+            responseSchema: "./src/schema/meshes/neo/nasaNeoSchema.json"
+            responseTypeName: NasaNeoFeed
+            argTypeMap:
+              start_date:
+                type: string
+                nullable: false
+              end_date:
+                type: string
+                nullable: false
+        queryParams:
+          api_key: JLgg6FRWKkCRk8pmDmzJwCRKLw9KjdwmWCgkrKpm
+
+    transforms:
+      - cache:
+          - field: Query.neoFeed
+            cacheKey: neoFeed-{args.start_date}-{args.end_date}
+            invalidate:
+              ttl: 3600 # seconds
+      - replace-field:
+          typeDefs: ./src/schema/meshes/neo/neoTypes.graphql
+          replacements:
+            - from:
+                type: NasaNeoFeed
+                field: near_earth_objects
+              to:
+                type: NearEarthObjectFeed
+                field: objects
+              composer: ./src/schema/meshes/neo/neoInflightResolver.js#flattenNeo
+              name: objects
+      - namingConvention:
+          mode: bare
+          fieldNames: camelCase
+ 

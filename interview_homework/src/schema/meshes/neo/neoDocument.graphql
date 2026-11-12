@@ -1,0 +1,20 @@
+query NasaNeoFeed($start_date: String!, $end_date: String!) {
+  neoFeed(start_date: $start_date, end_date: $end_date){
+    elementCount
+    objects {
+        id
+        name
+        isPotentiallyHazardousAsteroid
+        estimatedDiameterMinKm
+        estimatedDiameterMaxKm
+        closeApproachDate
+        relativeVelocityKph
+        missDistanceKm
+    }
+    links {
+      next
+      previous
+      self
+    }
+  }
+}
